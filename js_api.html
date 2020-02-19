@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS API Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,height=device-height,width=device-width"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script data-cfasync="false" async type="text/javascript" src="https://media.aso1.net/js/code.min.js"></script>
+    <script>
+        var _aso = _aso || {};
+        _aso.debug = true;
+        _aso.attr = {
+            'tags': ['tag1', 'tag2', 'tag3'],
+            'keywords': ['cats', 'dogs', 'monkeys']
+        };
+
+        var ad2loaded = false;
+        var ad3loaded = false;
+
+        function onEmpty(p) {
+            console.log('No ads loaded for zone ' + p.idzone);
+        }
+
+        function onLoad(p) {
+            console.log('Ad loaded for zone ' + p.idzone);
+        }
+
+        $(function () {
+
+            //example #1
+            $('#button').on('click', function () {
+                _ASO.loadAd('ad1', 34918); // HTML ID, Zone ID
+            });
+
+            //example #2 & #3
+            window.onscroll = function (ev) {
+
+                var currPos = window.innerHeight + window.pageYOffset;
+                var bottomPos = document.body.offsetHeight - 50;
+                var middlePos = Math.round(document.body.offsetHeight / 2);
+
+                if (currPos >= middlePos) {
+                    if (!ad2loaded) { //load one time only
+                        _ASO.loadAd('ad2', 34919); // HTML ID, Zone ID
+                        ad2loaded = true;
+                    }
+                }
+
+                if (currPos >= bottomPos) {
+                    if (!ad3loaded) { //load one time only
+                        _ASO.loadAd('ad3', 34919, true, { // HTML ID, Zone ID, async, params
+                            attr: {
+                                tags: ['a', 'b'],
+                                keywords: ['cars']
+                            },
+                            onempty: 'onEmpty',
+                            onload: 'onLoad'
+                        });
+
+                        ad3loaded = true;
+                    }
+                }
+            };
+        });
+    </script>
+    <style>
+        #ad3 {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>JS API Examples</h1>
+
+            <h3>1. Load ad by action</h3>
+            <div id="ad1"></div>
+            <button id="button" class="btn btn-success">Press Button</button>
+
+            <h3>2. Scroll page to the middle</h3>
+
+
+            <h3>3. Scroll page to the bottom</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ante leo, sagittis quis dignissim non,
+                venenatis eget ex. Nulla pharetra bibendum mollis. Praesent laoreet tempus ligula, sed pretium velit
+                consectetur ornare. Nam dictum est et scelerisque commodo. Aliquam dui diam, consequat sed rhoncus
+                luctus, luctus vel nisl. Ut porttitor ornare dolor, eu placerat mi hendrerit eu. Vivamus eu nulla risus.
+                Nullam efficitur vestibulum neque, in consequat justo scelerisque nec. Pellentesque tincidunt egestas
+                odio vitae congue.
+            </p>
+            <p>
+                Nam quis rutrum augue. Suspendisse enim lectus, sodales vel metus in, tincidunt tempus sapien.
+                Suspendisse id diam id metus mattis volutpat. Suspendisse ligula sem, egestas at nibh ac, malesuada
+                auctor est. Maecenas bibendum in metus vitae euismod. Donec nunc nulla, lobortis vitae nibh quis,
+                fermentum mattis neque. Suspendisse ornare erat nisl, vitae eleifend dui varius vel. Nullam gravida eu
+                lorem nec eleifend. Nunc commodo non arcu vitae sollicitudin. Quisque eget lobortis odio. Sed maximus
+                magna vel tincidunt bibendum. Phasellus sit amet ligula eget justo malesuada dictum. Ut libero est,
+                mattis a urna et, tempor euismod odio. Proin a leo vitae turpis rutrum interdum sit amet eu metus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in ex sed dolor bibendum porttitor. Sed
+                lobortis maximus massa et accumsan. Integer tristique, ipsum eu malesuada luctus, orci quam ultrices
+                justo, vitae maximus purus felis et nisi. Quisque pharetra tortor in risus condimentum, ut tempor leo
+                blandit. Ut viverra, augue ac euismod condimentum, sem lorem scelerisque est, vel consequat leo ipsum
+                vehicula ligula. Suspendisse pharetra ut ante et tincidunt. Nulla facilisi. Sed arcu sem, venenatis eu
+                ullamcorper ut, condimentum vel ante. Nullam sed pretium orci, ut venenatis lectus. Quisque nec pharetra
+                tortor. Etiam a tempor massa.
+            </p>
+            <p>
+                Cras mi dolor, imperdiet vitae massa in, suscipit accumsan neque. Praesent eget vestibulum sem, eget
+                malesuada mi. Sed congue enim eu risus dapibus imperdiet. Mauris at nunc nisl. Mauris a suscipit massa,
+                id maximus purus. Ut imperdiet hendrerit nibh vel efficitur. Aliquam ut pretium magna, in tempor metus.
+                Vestibulum ullamcorper ac tellus et porta. Nam sem libero, tristique ac convallis a, tincidunt vel sem.
+                Etiam dictum sagittis turpis in condimentum. Maecenas efficitur ultrices ligula, in viverra arcu posuere
+                a.
+            </p>
+            <p>
+                Suspendisse varius eget est sed posuere. Aenean posuere eros nec interdum congue. In nec tortor tortor.
+                Maecenas semper, nisi vestibulum luctus vehicula, purus nulla molestie nibh, in mattis dolor orci in
+                purus. Etiam id felis sodales, fermentum neque at, laoreet nunc. In laoreet imperdiet leo, feugiat
+                malesuada ante scelerisque quis. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                fames ac turpis egestas. Cras euismod in sapien vel volutpat. Duis facilisis sapien a egestas auctor.
+                Pellentesque in dapibus massa, at rutrum nibh.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ante leo, sagittis quis dignissim non,
+                venenatis eget ex. Nulla pharetra bibendum mollis. Praesent laoreet tempus ligula, sed pretium velit
+                consectetur ornare. Nam dictum est et scelerisque commodo. Aliquam dui diam, consequat sed rhoncus
+                luctus, luctus vel nisl. Ut porttitor ornare dolor, eu placerat mi hendrerit eu. Vivamus eu nulla risus.
+                Nullam efficitur vestibulum neque, in consequat justo scelerisque nec. Pellentesque tincidunt egestas
+                odio vitae congue.
+            </p>
+            <p>
+                Nam quis rutrum augue. Suspendisse enim lectus, sodales vel metus in, tincidunt tempus sapien.
+                Suspendisse id diam id metus mattis volutpat. Suspendisse ligula sem, egestas at nibh ac, malesuada
+                auctor est. Maecenas bibendum in metus vitae euismod. Donec nunc nulla, lobortis vitae nibh quis,
+                fermentum mattis neque. Suspendisse ornare erat nisl, vitae eleifend dui varius vel. Nullam gravida eu
+                lorem nec eleifend. Nunc commodo non arcu vitae sollicitudin. Quisque eget lobortis odio. Sed maximus
+                magna vel tincidunt bibendum. Phasellus sit amet ligula eget justo malesuada dictum. Ut libero est,
+                mattis a urna et, tempor euismod odio. Proin a leo vitae turpis rutrum interdum sit amet eu metus.
+            </p>
+            <div id="ad2"></div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in ex sed dolor bibendum porttitor. Sed
+                lobortis maximus massa et accumsan. Integer tristique, ipsum eu malesuada luctus, orci quam ultrices
+                justo, vitae maximus purus felis et nisi. Quisque pharetra tortor in risus condimentum, ut tempor leo
+                blandit. Ut viverra, augue ac euismod condimentum, sem lorem scelerisque est, vel consequat leo ipsum
+                vehicula ligula. Suspendisse pharetra ut ante et tincidunt. Nulla facilisi. Sed arcu sem, venenatis eu
+                ullamcorper ut, condimentum vel ante. Nullam sed pretium orci, ut venenatis lectus. Quisque nec pharetra
+                tortor. Etiam a tempor massa.
+            </p>
+            <p>
+                Cras mi dolor, imperdiet vitae massa in, suscipit accumsan neque. Praesent eget vestibulum sem, eget
+                malesuada mi. Sed congue enim eu risus dapibus imperdiet. Mauris at nunc nisl. Mauris a suscipit massa,
+                id maximus purus. Ut imperdiet hendrerit nibh vel efficitur. Aliquam ut pretium magna, in tempor metus.
+                Vestibulum ullamcorper ac tellus et porta. Nam sem libero, tristique ac convallis a, tincidunt vel sem.
+                Etiam dictum sagittis turpis in condimentum. Maecenas efficitur ultrices ligula, in viverra arcu posuere
+                a.
+            </p>
+            <p>
+                Suspendisse varius eget est sed posuere. Aenean posuere eros nec interdum congue. In nec tortor tortor.
+                Maecenas semper, nisi vestibulum luctus vehicula, purus nulla molestie nibh, in mattis dolor orci in
+                purus. Etiam id felis sodales, fermentum neque at, laoreet nunc. In laoreet imperdiet leo, feugiat
+                malesuada ante scelerisque quis. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                fames ac turpis egestas. Cras euismod in sapien vel volutpat. Duis facilisis sapien a egestas auctor.
+                Pellentesque in dapibus massa, at rutrum nibh.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ante leo, sagittis quis dignissim non,
+                venenatis eget ex. Nulla pharetra bibendum mollis. Praesent laoreet tempus ligula, sed pretium velit
+                consectetur ornare. Nam dictum est et scelerisque commodo. Aliquam dui diam, consequat sed rhoncus
+                luctus, luctus vel nisl. Ut porttitor ornare dolor, eu placerat mi hendrerit eu. Vivamus eu nulla risus.
+                Nullam efficitur vestibulum neque, in consequat justo scelerisque nec. Pellentesque tincidunt egestas
+                odio vitae congue.
+            </p>
+            <p>
+                Nam quis rutrum augue. Suspendisse enim lectus, sodales vel metus in, tincidunt tempus sapien.
+                Suspendisse id diam id metus mattis volutpat. Suspendisse ligula sem, egestas at nibh ac, malesuada
+                auctor est. Maecenas bibendum in metus vitae euismod. Donec nunc nulla, lobortis vitae nibh quis,
+                fermentum mattis neque. Suspendisse ornare erat nisl, vitae eleifend dui varius vel. Nullam gravida eu
+                lorem nec eleifend. Nunc commodo non arcu vitae sollicitudin. Quisque eget lobortis odio. Sed maximus
+                magna vel tincidunt bibendum. Phasellus sit amet ligula eget justo malesuada dictum. Ut libero est,
+                mattis a urna et, tempor euismod odio. Proin a leo vitae turpis rutrum interdum sit amet eu metus.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam in ex sed dolor bibendum porttitor. Sed
+                lobortis maximus massa et accumsan. Integer tristique, ipsum eu malesuada luctus, orci quam ultrices
+                justo, vitae maximus purus felis et nisi. Quisque pharetra tortor in risus condimentum, ut tempor leo
+                blandit. Ut viverra, augue ac euismod condimentum, sem lorem scelerisque est, vel consequat leo ipsum
+                vehicula ligula. Suspendisse pharetra ut ante et tincidunt. Nulla facilisi. Sed arcu sem, venenatis eu
+                ullamcorper ut, condimentum vel ante. Nullam sed pretium orci, ut venenatis lectus. Quisque nec pharetra
+                tortor. Etiam a tempor massa.
+            </p>
+            <p>
+                Cras mi dolor, imperdiet vitae massa in, suscipit accumsan neque. Praesent eget vestibulum sem, eget
+                malesuada mi. Sed congue enim eu risus dapibus imperdiet. Mauris at nunc nisl. Mauris a suscipit massa,
+                id maximus purus. Ut imperdiet hendrerit nibh vel efficitur. Aliquam ut pretium magna, in tempor metus.
+                Vestibulum ullamcorper ac tellus et porta. Nam sem libero, tristique ac convallis a, tincidunt vel sem.
+                Etiam dictum sagittis turpis in condimentum. Maecenas efficitur ultrices ligula, in viverra arcu posuere
+                a.
+            </p>
+            <p>
+                Suspendisse varius eget est sed posuere. Aenean posuere eros nec interdum congue. In nec tortor tortor.
+                Maecenas semper, nisi vestibulum luctus vehicula, purus nulla molestie nibh, in mattis dolor orci in
+                purus. Etiam id felis sodales, fermentum neque at, laoreet nunc. In laoreet imperdiet leo, feugiat
+                malesuada ante scelerisque quis. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                fames ac turpis egestas. Cras euismod in sapien vel volutpat. Duis facilisis sapien a egestas auctor.
+                Pellentesque in dapibus massa, at rutrum nibh.
+            </p>
+        </div>
+    </div>
+    <div id="ad3"></div>
+</div>
+</body>
+</html>

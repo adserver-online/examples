@@ -6,6 +6,7 @@ $endPoint = 'https://api.adsrv.net/v2';
 
 $token = 'create token in your panel';
 
+$client = new Client();
 $request = $client->get($endPoint . '/stats', [
     'headers' => [
         'Authorization' => 'Bearer ' . $token,
